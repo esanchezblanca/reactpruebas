@@ -21,6 +21,17 @@ export default class Formulario extends LibreriaReact.Component {
         });
         console.log(valorInput);
     }
+
+    gestionarCheckbox = (objEvento) => {
+        let inputEvento = objEvento.target;
+        let valorInput = inputEvento.value;
+        let objArt = this.state.objArticulo;
+        objArt[inputEvento.name] = objEvento.target;
+        this.setState({
+            objArticulo: objArt
+        });
+        console.log(valorInput);
+    }
     gestionarAntesDeEnviarForm = (objEvento) => {
         objEvento.preventDefault();
         //alert('A name was submitted: ' + this.state.titulo);
@@ -41,7 +52,10 @@ export default class Formulario extends LibreriaReact.Component {
         });
         promesaEnvio
         .then(res => res.json())
-        .then(data => alert("Se envio " + data.json));;
+        .then(data => alert("Se envió y recibimos " + JSON.stringify));;
+        // if (data != null){
+        //     this.componentDidMount();
+        // });;
         /* {
             "titulo": "Se ha perdido un perro",
             "descripcion": "Se perdió en el Retiro y nunca apareción" 
@@ -60,11 +74,15 @@ export default class Formulario extends LibreriaReact.Component {
                     </div>
                     <div>
                         {labelAutor}
-                    <input name="autor" type="text" onChange={this.gestionarInput} />
+                        <input name="autor" type="text" onChange={this.gestionarInput} />
                     </div>
                     <div>
                         <label>Descripcion:</label>
                         <textarea name="descripcion" onChange={this.gestionarInput}></textarea>
+                    </div>
+                    <div>
+                        <label>Público:</label>
+                    <input type="checkbox" name="publico" onChange={this.gestionarInput} />
                     </div>
                     <div><input type="submit" value="Enviar!" /></div>
                 </form>
